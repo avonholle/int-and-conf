@@ -12,7 +12,7 @@ shinyUI(pageWithSidebar(
       sliderInput("beta0",
                   withMathJax(
                     helpText('\\( 
-                             \\text{Intercept = } (\\beta_0)
+                             \\text{Intercept:} (\\beta_0)
                              \\)')
                   ),
                   min=-3, max=3, value=0.5, step=0.1, format="#.#", animate=FALSE),
@@ -33,7 +33,7 @@ shinyUI(pageWithSidebar(
       sliderInput("beta3",
                   withMathJax(
                     helpText('\\( 
-                             \\text{Coefficient for} x \\times z \\text{ interaction: } (\\beta_3)
+                             \\text{Coefficient for } x \\times z \\text{ interaction: } (\\beta_3)
                              \\)')
                   ),
                   min=-3, max=3, value=1, step=0.1, format="#.#", animate=FALSE),
