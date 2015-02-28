@@ -8,18 +8,42 @@ shinyUI(pageWithSidebar(
     sidebarPanel(
       h2("Select parameters for simulation"),
       p("Regression coefficients for logistic regression:"),
-      sliderInput("n1","sample size", min=50, max=5000, value=500, step=1, format="###", animate=FALSE),
-      sliderInput("beta0", HTML("$$\\text{Intercept: } \\beta_0 $$"),  min=-3, max=3, value=0.5, step=0.1, format="#.#", animate=FALSE),
-      sliderInput("beta1", HTML("$$\\text{Coefficient for x: }\\beta_1$$"), min=-3, max=3, value=0.1, step=0.1, format="#.#", animate=FALSE),
-      sliderInput("beta2", HTML("$$\\text{Coefficient for z: }\\beta_2$$"), min=-3, max=3, value=0.0, step=0.1, format="#.#", animate=FALSE),
-      sliderInput("beta3", HTML("$$\\text{Coefficient for xz interaction: }\\beta_3$$"), min=-3, max=3, value=1, step=0.1, format="#.#", animate=FALSE),
+      sliderInput("n1","Sample size:", min=50, max=5000, value=500, step=1, format="###", animate=FALSE),  
+      sliderInput("beta0",
+                  withMathJax(
+                    helpText('\\( 
+                             \\text{Intercept = } (\\beta_0)
+                             \\)')
+                  ),
+                  min=-3, max=3, value=0.5, step=0.1, format="#.#", animate=FALSE),
+      sliderInput("beta1", 
+                  withMathJax(
+                    helpText('\\( 
+                             \\text{Coefficient for x: } (\\beta_1)
+                             \\)')
+                  ),
+                  min=-3, max=3, value=0.1, step=0.1, format="#.#", animate=FALSE),
+      sliderInput("beta2", 
+                  withMathJax(
+                    helpText('\\( 
+                             \\text{Coefficient for z: } (\\beta_2)
+                             \\)')
+                  ),
+                  min=-3, max=3, value=0.0, step=0.1, format="#.#", animate=FALSE),
+      sliderInput("beta3",
+                  withMathJax(
+                    helpText('\\( 
+                             \\text{Coefficient for} x \\times z \\text{ interaction: } (\\beta_3)
+                             \\)')
+                  ),
+                  min=-3, max=3, value=1, step=0.1, format="#.#", animate=FALSE),
       br(),
-      p("Click on 'confounding' box and/or 'interaction' box to add confouding and/or interaciton to the model"),
-      p("Default model is no confounding or interaction"),
+      p("Click on 'confounding' box and/or 'interaction' box to add confouding and/or interaciton to the model."),
+      p("Default model is no confounding or interaction."),
       checkboxInput(inputId = "conf", label = "Confounding", value=F),
       checkboxInput(inputId = "interact", label = "Interaction", value=F)
     ),
-    
+  
     mainPanel(
         withMathJax(),
         h3("Full model for simulation"),
