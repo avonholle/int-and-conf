@@ -390,6 +390,13 @@ output$eqn1 <- renderUI({
   )
 })
 
+output$eqn2 <- renderUI({
+  withMathJax(
+    helpText('\\( \\text{logit(p) = } \\left(\\frac{p}{1-p}\\right) \\text{ = } \\beta_0 + \\beta_1 \\cdot x + \\beta_2 \\cdot z
+             \\)')
+  )
+})
+
 output$textconf <- renderUI({
   withMathJax(
     helpText('\\( \\text{logit(z) = 0 + 3}\\cdot\\text{x} \\)'
