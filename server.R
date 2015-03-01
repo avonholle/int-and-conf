@@ -5,6 +5,7 @@ library(Epi)
 library(reshape)
 library(ggplot2)
 library(reshape2)
+library(diagram)
 
 # Parameters for function below..................
 # ns: number of people in sample
@@ -244,6 +245,36 @@ output$oddsplot.2 <- renderPlot({
       y = "Odds ratios")) +
     theme_bw()
 })
+
+# Create a dag to include near model
+# see http://shiny.rstudio.com/articles/images.html
+
+output$myImage <- renderImage({
+  # A temp file to save the output.
+  # This file will be removed later by renderImage
+  outfile <- tempfile(fileext='.png')
+  
+  # Generate the PNG
+  png(outfile, width=400, height=300)
+    # revised version to match what I need for the html
+    par(mar = c(0.5, 0.5, 0.5, 0.5))
+    openplotmat()
+    elpos <- coordinates (c(1, 2), mx = 0.1, my = -0.1)
+    straightarrow(from = elpos[1, ], to = elpos[2, ], lty = 1, lcol = 1, arr.width=0.5, arr.length=0.5, arr.type="triangle")
+    straightarrow(from = elpos[2, ], to = elpos[3, ], lty = 1, lcol = 1, arr.width=0.5, arr.length=0.5, arr.type="triangle")
+    straightarrow(from = elpos[1, ], to = elpos[3, ], lty = 1, lcol = 1, arr.width=0.5, arr.length=0.5, arr.type="triangle")
+    textrect (elpos[1,], 0.05, 0.05, lab = "z", cex = 1.5)
+    textrect (elpos[2,], 0.05, 0.05, lab = "x", cex = 1.5)
+    textrect (elpos[3,], 0.05, 0.05, lab = "y", cex = 1.5)
+  dev.off()
+  
+  # Return a list containing the filename
+  list(src = outfile,
+       contentType = 'image/png',
+       width = 400,
+       height = 300,
+       alt = "DAG")
+}, deleteFile = TRUE)
 
 # output odds ratios to table by strata of x and z
 # ###########################################################

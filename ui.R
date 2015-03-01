@@ -12,21 +12,21 @@ shinyUI(pageWithSidebar(
       sliderInput("beta0",
                   withMathJax(
                     helpText('\\( 
-                             \\text{Intercept:} (\\beta_0)
+                             \\text{Intercept (log odds for outcome at x=0 and z=0): } (\\beta_0)
                              \\)')
                   ),
                   min=-3, max=3, value=0.5, step=0.1, format="#.#", animate=FALSE),
       sliderInput("beta1", 
                   withMathJax(
                     helpText('\\( 
-                             \\text{Coefficient for x: } (\\beta_1)
+                             \\text{Coefficient for x (exposure): } (\\beta_1)
                              \\)')
                   ),
                   min=-3, max=3, value=0.1, step=0.1, format="#.#", animate=FALSE),
       sliderInput("beta2", 
                   withMathJax(
                     helpText('\\( 
-                             \\text{Coefficient for z: } (\\beta_2)
+                             \\text{Coefficient for z (confounder): } (\\beta_2)
                              \\)')
                   ),
                   min=-3, max=3, value=0.0, step=0.1, format="#.#", animate=FALSE),
@@ -62,8 +62,12 @@ shinyUI(pageWithSidebar(
         textOutput("textc"),
         textOutput("texti"),
         br(),
+        h3("DAG"),
+        imageOutput("myImage"),
+        h3("Plot of crude and stratified odds ratios"),
+        plotOutput("oddsplot.2"),
         h4("Estimated values"),
-        h3("Compare crude odds ratio for x to strata estimates by z (to assess confounding)"),
+        h5("Compare crude odds ratio for x to strata estimates by z (to assess confounding)"),
         textOutput("compare.odds.crude"),
 #        htmlOutput("check.odds.crude"),
 #        htmlOutput("check.odds.crude.2"),
@@ -88,9 +92,7 @@ shinyUI(pageWithSidebar(
         br(),
         h3("Plot of log odds by groups"),
         plotOutput("oddsplot"),
-        br(),
-        h3("Plot of crude and stratified odds ratios"),
-        plotOutput("oddsplot.2")
+        br()
         #htmlOutput("summary.2")
         
         
